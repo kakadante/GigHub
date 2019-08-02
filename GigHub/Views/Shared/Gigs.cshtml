@@ -1,4 +1,6 @@
-﻿@model GigHub.ViewModels.GigsViewModel
+﻿@using System.Activities.Statements
+@using System.Web.Razor.Parser.SyntaxTree
+@model GigHub.ViewModels.GigsViewModel
 
 @{
     ViewBag.Title = Model.Heading;
@@ -30,8 +32,13 @@
         <div class="details">
             <span class="artist">
                 @gig.Artist.Name 
+                
+                @if (gig.IsCanceled)
+                {
+                    <span class ="label label-warning">This Gig Is Canceled</span>
+                }
 
-                @if (Model.ShowActions)
+                @if (Model.ShowActions && !gig.IsCanceled)
                    {
                        <button class="btn btn-link btn-sm pull-right js-toggle-follow" data-user-id="@gig.ArtistId">Wanna Follow?</button>
                    }
@@ -39,7 +46,7 @@
             <span class="genre">
                 @gig.Genre.Name
             </span>
-                  @if (Model.ShowActions)
+                  @if (Model.ShowActions && !gig.IsCanceled)
                   {
                       <button data-gig-id="@gig.Id" class="btn btn-default btn-sm pull-right js-toggle-attendance">Going ?</button>
                   }
