@@ -26,6 +26,17 @@ namespace GigHub.Controllers.Api
             var userId = User.Identity.GetUserId();
             var gig = _context.Gigs.Single(g => g.Id == id && g.ArtistId == userId);
 
+
+
+            //todo --- KAMA GIG IKO CANCELED NA USER ANAITUMIA TENA nimeoneza ii CONDITION
+                if (gig.IsCanceled)
+                {
+                    return NotFound();
+                }
+            //todo --------------------------
+
+
+
             gig.IsCanceled = true;
             _context.SaveChanges();
 
