@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Linq;
 using System.Web.Http;
 using GigHub.Models;
 using Microsoft.AspNet.Identity;
@@ -28,7 +24,7 @@ namespace GigHub.Controllers.Api
 
 
 
-            //todo --- KAMA GIG IKO CANCELED NA USER ANAITUMIA TENA nimeoneza ii CONDITION
+            //todo --- KAMA GIG IKO CANCELED NA USER ANAITUMIA TENA nimeongeza ii CONDITION
                 if (gig.IsCanceled)
                 {
                     return NotFound();
