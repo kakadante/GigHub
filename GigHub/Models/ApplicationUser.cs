@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -39,13 +40,13 @@ namespace GigHub.Models
 
         public void Notify(Notification notification)
         {
-            var userNotification = new UserNotification
-            {
-                User = this,
-                Notification = notification
-            };
+            //! sasa badala ya ii 
 
-            UserNotifications.Add(userNotification);
+            //var userNotification = new UserNotification(this, notification);  
+            //UserNotifications.Add(userNotification);
+
+            //! tutumie ii 
+            UserNotifications.Add(new UserNotification(this, notification));
         }
     }
 }
