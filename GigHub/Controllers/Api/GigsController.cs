@@ -14,8 +14,7 @@ namespace GigHub.Controllers.Api
 
         public GigsController()
         {
-            _context = new ApplicationDbContext();
-        }
+            _context = new ApplicationDbContext(); }
 
         [HttpDelete]
         public IHttpActionResult Cancel(int id)
@@ -51,13 +50,7 @@ namespace GigHub.Controllers.Api
 
             foreach (var attendee in attendees)
             {
-                var userNotification = new UserNotification
-                {
-                    User = attendee,
-                    Notification = notification
-                };
-
-                _context.UserNotifications.Add(userNotification);
+                attendee.Notify(notification);
             }
             //? ------------------------------------------------
 
