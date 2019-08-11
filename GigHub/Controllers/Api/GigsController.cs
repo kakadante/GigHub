@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
 using GigHub.Models;
@@ -20,7 +21,9 @@ namespace GigHub.Controllers.Api
         public IHttpActionResult Cancel(int id)
         {
             var userId = User.Identity.GetUserId();
-            var gig = _context.Gigs.Single(g => g.Id == id && g.ArtistId == userId);
+            var gig = _context.Gigs
+                .Include(g => g.Attendances.Select(a => a.Attendee))
+                .Single(g => g.Id == id && g.ArtistId == userId);
 
 
 
@@ -38,13 +41,14 @@ namespace GigHub.Controllers.Api
             //? --- Gig Ikicanceliwa tutengeneze NOTIFICATION kwa USER
             var notification = new Notification(NotificationType.GigCanceled, gig);
 
+//! After working on io Include apo juu, we wont need the below code, acha ni-comment tu.
 
-            var attendees = _context.Attendances
-                .Where(a => a.GigId == gig.Id)
-                .Select(a => a.Attendee)
-                .ToList();
+            //var attendees = _context.Attendances
+            //    .Where(a => a.GigId == gig.Id)
+            //    .Select(a => a.Attendee)
+            //    .ToList();
 
-            foreach (var attendee in attendees)
+            foreach (var attendee in gig.Attendances.Select(a => a.Attendee))
             {
                 attendee.Notify(notification);
             }
