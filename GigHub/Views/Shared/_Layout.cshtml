@@ -42,5 +42,44 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    
+
+
+            @*jquery ya kuita NUMBER OF NOTIFICATIONS*@
+            <script>
+                $(document).ready(function() {
+                    $.getJSON("/api/notifications", function (notifications) {
+                        $(".js-notifications-count")
+                            .text(notifications.length)
+                            .removeClass("hide")
+                            .addClass("animated bounceInDown");
+                    });
+
+                    $(".notifications").popover({
+                        html: true,
+                        title: "Notifications",
+                        content: function () {
+
+                            //todo Izi ni za ku-TASTE CODE
+
+                            //return "KAKA DANTE";
+
+                            var compiled = _.template("Hello <%= name %>");
+                            var html = compiled({name: "PAPA-WESH"});
+
+                            return html;
+
+                            //todo Adi APA
+
+                        },
+                        placement: "bottom" 
+
+                });
+                });
+            </script>
+            @* INAISHIA APA*@
+
+
+
 </body>
 </html>
