@@ -32,37 +32,32 @@ namespace GigHub.Controllers.Api
                 .ToList();
 
 
-            Mapper.CreateMap<ApplicationUser, UserDto>();
-            Mapper.CreateMap<Gig, GigDto>();
-            Mapper.CreateMap<Notification, NotificationDto>();
-
-
+           return notifications.Select(Mapper.Map<Notification, NotificationDto>);
 
             //! AFTER MAPPING WE CAN GET RID OF THIS
 
-                //return notifications.Select(n => new NotificationDto()
-                //{
-                //    DateTime = n.DateTime,
-                //    Gig = new GigDto
-                //    {
-                //        Artist = new UserDto
-                //        {
-                //            Id = n.Gig.Artist.Id,
-                //            Name = n.Gig.Artist.Name
-                //        },
+            //return notifications.Select(n => new NotificationDto()
+            //{
+            //    DateTime = n.DateTime,
+            //    Gig = new GigDto
+            //    {
+            //        Artist = new UserDto
+            //        {
+            //            Id = n.Gig.Artist.Id,
+            //            Name = n.Gig.Artist.Name
+            //        },
 
-                //        DateTime = n.Gig.DateTime,
-                //        Id = n.Gig.Id,
-                //        IsCanceled = n.Gig.IsCanceled,
-                //        Venue = n.Gig.Venue
-                //    },
+            //        DateTime = n.Gig.DateTime,
+            //        Id = n.Gig.Id,
+            //        IsCanceled = n.Gig.IsCanceled,
+            //        Venue = n.Gig.Venue
+            //    },
 
-                //    OriginalDateTime = n.OriginalDateTime,
-                //    OriginalVenue = n.OriginalVenue,
-                //    Type = n.Type
-                //});
+            //    OriginalDateTime = n.OriginalDateTime,
+            //    OriginalVenue = n.OriginalVenue,
+            //    Type = n.Type
+            //});
 
-                return notifications.Select(Mapper.Map<Notification, NotificationDto>);
         }
 
     }

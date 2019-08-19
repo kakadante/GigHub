@@ -126,6 +126,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { /*affects the HEADINGS*/
     display: inline-block;
     /*padding: 6px 22px;*/
     margin-bottom: 0px;
+    margin-top: 2px;
     /*font-size: 14px;*/
     font-weight: normal;
     line-height: 1.428571429;
@@ -133,9 +134,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { /*affects the HEADINGS*/
     white-space: nowrap;
     vertical-align: middle;
     cursor: pointer;
-    border: 5px solid #00000021;
+    border: 2px solid #00000021;
     -ms-border-radius: 18px;
-    border-radius: 18px;
+    border-radius: 16px;
 }
 
 .form-control:focus {                       /*ii ni saa zenye unahover TEXT BOX uselect data*/
@@ -161,7 +162,7 @@ span.field-validation-error {
 
 .gigs > li {                    /*sets attributes to the GIGS list container*/  
     position: relative;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 }
     
 .gigs >li .details {                /*sets attributes to the GIGS list container on the DETAILS div*/
@@ -176,6 +177,7 @@ span.field-validation-error {
     color: #ffffff;
     text-align: center;
     width: 60px;
+    height: 85px;
     -ms-border-radius: 6px;
     border-radius: 6px;
 }
