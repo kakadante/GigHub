@@ -39,41 +39,45 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/lib")
     @RenderSection("scripts", required: false)
     
 <script type="text/x-template" id="notifications-template">
-    <ul>
+    <ul class="notifications">
+
+        <span><center> !!-------------------------------------!! </center></span>
+
         <%
-            _.each(notifications, function(notification){
-                if (notification.type == 1) { %>
-                    <li> <%= notification.gig.artist.name %> has canceled the gig at <%= notification.gig.venue %> at <%= notification.gig.dateTime %>.</li>
-                <%}
+        _.each(notifications, function(notification){
+        if (notification.type == 1) { %>
+        <li> <span class="highlight"><%= notification.gig.artist.name %></span> has canceled the gig at <span class="highlight"><%= notification.gig.venue %></span> at <span class="highlight2"><%= moment(notification.gig.dateTime).format("D MMM HH:mm") %></span>.</li> @*todo TUMETUMIA MOMENT.JS APA*@
+        <%}
 
-                        else if (notification.type == 2) {
-                            var changes = [],
-                                originalValues = [],
-                                newValues = [];
-                        
-                            if (notification.originalVenue != notification.gig.venue){
-                                    changes.push ('venue');
-                                    originalValues.push (notification.originalVenue);
-                                    newValues.push (notification.gig.venue);
-                            }
+        else if (notification.type == 2) {
+        var changes = [],
+        originalValues = [],
+        newValues = [];
 
-                            if (notification.originalDateTime != notification.gig.dateTime){
-                                    changes.push ('date/time');
-                                    originalValues.push (notification.originalDateTime);
-                                    newValues.push (notification.gig.dateTime);
-                            }
-                        %>
-                    <li> <%= notification.gig.artist.name %> has changed the <%= changes.join(' and ') %> of the gig from <%= originalValues.join('/') %> to <%= newValues.join('/') %>.</li>
-                        <%
-                        }
+        if (notification.originalVenue != notification.gig.venue){
+        changes.push ('venue');
+        originalValues.push (notification.originalVenue);
+        newValues.push (notification.gig.venue);
+        }
 
-            })
+        if (notification.originalDateTime != notification.gig.dateTime){
+        changes.push ('date/time');
+        originalValues.push (moment(notification.originalDateTime).format("D MMM HH:mm"));
+        newValues.push (moment(notification.gig.dateTime).format("D MMM HH:mm"));
+        }
         %>
+        <li> <span class="highlight"><%= notification.gig.artist.name %></span> has changed the <span class="highlight"><%= changes.join(' and ') %></span> of the gig from <span class="highlight2"><%= originalValues.join('/') %></span> to <span class="highlight2"><%= newValues.join('/') %></span>.</li>
+        <%
+        }
+
+        })
+        %>
+        <span><center> !!-------------------------------------!! </center></span>
+
     </ul>
 </script>
 
@@ -106,7 +110,9 @@
                                 //todo Adi APA
 
                             },
-                            placement: "bottom"
+                            placement: "bottom",
+                            //template: '<div class="popover popover-notifications" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
+
 
                         });
                     });

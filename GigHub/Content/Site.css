@@ -100,6 +100,11 @@ body {                                                  /*affects the whole body
     border-bottom-color: #c31818;
 }
 
+.popover {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
 
 
 
@@ -226,4 +231,36 @@ span.field-validation-error {
 }
 
 
-/*CASTRO MANENOS*/
+/*todo               -------------------CASTRO MANENOS----------------------------        */
+/*todo    STYLING YA NOTIFICATIONS */
+
+.popover-notifications .popover-content {           /*ii aifanyi, kwa LAYOUT nimedefine bt haiduu*/
+    padding: 0;
+}
+
+ul.notifications {
+    list-style: none;
+    padding-left: 0;
+}
+
+ ul.notifications > li {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+ ul.notifications > li:last-child {
+        border-bottom: none;
+    }
+
+ ul.notifications > li:first-child {
+        border-top: 1px solid #ddd;
+ }
+
+    ul.notifications .highlight {
+        font-weight: bold;
+    }
+
+    ul.notifications .highlight2 {
+        font-weight: bold;
+        text-decoration: underline;
+    }
