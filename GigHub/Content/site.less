@@ -11,7 +11,7 @@
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
-*/
+*/  
 .dl-horizontal dt {
     white-space: normal;
 }
@@ -241,26 +241,22 @@ span.field-validation-error {
 ul.notifications {
     list-style: none;
     padding-left: 0;
-}
 
- ul.notifications > li {
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
-}
+    > li {
+        border-bottom: 1px solid #ddd;
+        padding: 10px 0;
+    }
 
- ul.notifications > li:last-child {
+    > li:last-child {
         border-bottom: none;
     }
 
- ul.notifications > li:first-child {
-        border-top: 1px solid #ddd;
- }
-
-    ul.notifications .highlight {
+    .highlight {
         font-weight: bold;
     }
 
-    ul.notifications .highlight2 {
+    .highlight2 {
         font-weight: bold;
         text-decoration: underline;
     }
+}
