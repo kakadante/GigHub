@@ -1,72 +1,150 @@
-﻿body {
-    padding-top: 100px;
-    padding-bottom: 20px;
-}
+﻿@color_1: #fff;
+@color_2: #d8cece;
+@color_3: #555555;
+@color_4: #ff0000;
+@color_5: #ffffff;
+@color_6: #333;
+@font_family_1: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+@background_color_1: #ff4342;
+@background_color_2: #ce2d2dd6;
+@background_color_3: #CCCCAA;
+@border_color_1: #ff4342;
+@border_color_2: #dfff00;
+@border_top_color_1: #fff;
+@border_top_color_2: #020202;
+@border_bottom_color_1: #fff;
+@border_bottom_color_2: #c31818;
 
 /* Set padding to keep content from hitting the edges */
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+/* Set width on the form input elements since they're 100% wide by default */
+/* BOOTSTRAP OVERRIDES */
+/*CLASS THAT IS NOT PART OF BOOTSTRAP BUT PART OF ASP.NET MVC*/
+/*PAGE-LEVEL STYLES*/
+/*todo               -------------------CASTRO MANENOS----------------------------        */
+/*todo    STYLING YA NOTIFICATIONS */
+body {
+    padding-top: 100px;
+    padding-bottom: 20px;
+    font-family: @font_family_1;
+    font-size: 14px;
+}
+
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/  
-.dl-horizontal dt {
-    white-space: normal;
+.dl-horizontal {
+    dt {
+        white-space: normal;
+    }
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
+input {
+    max-width: 280px;
+}
+
+select {
+    max-width: 280px;
+}
+
 textarea {
     max-width: 280px;
 }
 
-
-
-.voffset {                                      /*ALL ARE VERTICAL MARGIN OFFSETS*/
+.voffset {
     margin-top: 2px;
 }
+
 .voffset1 {
     margin-top: 5px;
 }
+
 .voffset2 {
     margin-top: 20px;
 }
+
 .voffset3 {
     margin-top: 40px;
 }
+
 .voffset4 {
     margin-top: 60px;
 }
+
 .voffset5 {
-     margin-top: 80px;
+    margin-top: 80px;
 }
 
-
-
-
-
-
-            /* BOOTSTRAP OVERRIDES */
-body {                                                  /*affects the whole body but not the NAVBAR*/
-    font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 14px;
+.navbar {
+    background-color: @background_color_1;
+    border-color: @border_color_1;
 }
 
+.navbar-inverse {
+    .navbar-nav {
+        > li {
+            > a {
+                color: @color_1;
+                font-family: @font_family_1;
+            }
+        }
 
+        > .open {
+            > a {
+                background-color: @background_color_2;
 
+                &:hover {
+                    background-color: @background_color_2;
 
-.navbar {                                               /*affects the NAVBAR*/
-    background-color: #ff4342;
-    border-color: #ff4342;
-}
+                    .caret {
+                        border-top-color: @border_top_color_2;
+                        border-bottom-color: @border_bottom_color_2;
+                    }
+                }
 
-.navbar-inverse .navbar-nav > li > a {
-    color: #fff;
-    font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    /*font-weight: 800;*/
+                &:focus {
+                    background-color: @background_color_2;
+
+                    .caret {
+                        border-top-color: @border_top_color_2;
+                        border-bottom-color: @border_bottom_color_2;
+                    }
+                }
+
+                .caret {
+                    border-top-color: @border_top_color_2;
+                    border-bottom-color: @border_bottom_color_2;
+                }
+            }
+        }
+
+        > .dropdown {
+            > a {
+                .caret {
+                    border-top-color: @border_top_color_1;
+                    border-bottom-color: @border_bottom_color_1;
+                }
+            }
+        }
+    }
+
+    .navbar-brand {
+        color: @color_2;
+        font-family: @font_family_1;
+    }
+
+    .notifications {
+        .badge {
+            position: absolute;
+            top: 8px;
+            right: -2px;
+            background: #a80a0a;
+        }
+    }
 }
 
 .navbar-brand {
@@ -74,72 +152,111 @@ body {                                                  /*affects the whole body
     padding: 15px 16px;
 }
 
-.navbar-inverse .navbar-brand {
-    color: #d8cece;
-    font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-.navbar-inverse .notifications .badge{
-    position: absolute;
-    top: 8px;
-    right: -2px;
-    background: #a80a0a;
-}
-
-.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
-    background-color: #ce2d2dd6;
-}
-
-.navbar-inverse .navbar-nav > .dropdown > a .caret {            /*Izi mbili ni za io Caret*/
-    border-top-color: #fff;
-    border-bottom-color: #fff;
-}
-
-.navbar-inverse .navbar-nav > .open > a .caret, .navbar-inverse .navbar-nav > .open > a:hover .caret, .navbar-inverse .navbar-nav > .open > a:focus .caret {
-    border-top-color: #020202;
-    border-bottom-color: #c31818;
-}
-
 .popover {
     box-shadow: none;
     -webkit-box-shadow: none;
 }
 
-
-
-
-
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { /*affects the HEADINGS*/
-    font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+h1 {
+    font-family: @font_family_1;
     font-weight: 400;
     line-height: 1.0;
 }
 
-.form-group {                                       /*affects the FORM*/
+h2 {
+    font-family: @font_family_1;
+    font-weight: 400;
+    line-height: 1.0;
+}
+
+h3 {
+    font-family: @font_family_1;
+    font-weight: 400;
+    line-height: 1.0;
+}
+
+h4 {
+    font-family: @font_family_1;
+    font-weight: 400;
+    line-height: 1.0;
+}
+
+h5 {
+    font-family: @font_family_1;
+    font-weight: 400;
+    line-height: 1.0;
+}
+
+h6 {
+    font-family: @font_family_1;
+    font-weight: 400;
+    line-height: 1.0;
+}
+
+.h1 {
+    font-family: @font_family_1;
+    font-weight: 400;
+    line-height: 1.0;
+}
+
+.h2 {
+    font-family: @font_family_1;
+    font-weight: 400;
+    line-height: 1.0;
+}
+
+.h3 {
+    font-family: @font_family_1;
+    font-weight: 400;
+    line-height: 1.0;
+}
+
+.h4 {
+    font-family: @font_family_1;
+    font-weight: 400;
+    line-height: 1.0;
+}
+
+.h5 {
+    font-family: @font_family_1;
+    font-weight: 400;
+    line-height: 1.0;
+}
+
+.h6 {
+    font-family: @font_family_1;
+    font-weight: 400;
+    line-height: 1.0;
+}
+
+.form-group {
     margin-bottom: 20px;
 }
 
-.form-control {                         /*Izi zina-affect adi Text-Boxes za form*/
+.form-control {
     display: block;
     width: 100%;
     height: 43px;
     padding: 6px 20px;
     font-size: 14px;
     line-height: 1.128571429;
-    color: #555555;
+    color: @color_3;
     vertical-align: middle;
-    background-color: #CCCCAA;
+    background-color: @background_color_3;
     border: 2px solid #CCCC78;
     border-radius: 14px;
+
+    &:focus {
+        border-color: @border_color_2;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
 }
 
-
-.btn { /*ii ni io button ya Save uko down*/
+.btn {
     display: inline-block;
-    /*padding: 6px 22px;*/
     margin-bottom: 0px;
     margin-top: 2px;
-    /*font-size: 14px;*/
     font-weight: normal;
     line-height: 1.428571429;
     text-align: center;
@@ -151,91 +268,74 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { /*affects the HEADINGS*/
     border-radius: 16px;
 }
 
-.form-control:focus {                       /*ii ni saa zenye unahover TEXT BOX uselect data*/
-    border-color: #dfff00;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-}
-
-
-
-/*CLASS THAT IS NOT PART OF BOOTSTRAP BUT PART OF ASP.NET MVC*/
 span.field-validation-error {
-    color: #ff0000;
+    color: @color_4;
 }
 
-
-
-/*PAGE-LEVEL STYLES*/
-.gigs {                         /*removes bullets*/
+.gigs {
     list-style: none;
-}
 
+    > li {
+        position: relative;
+        margin-bottom: 50px;
 
-.gigs > li {                    /*sets attributes to the GIGS list container*/  
-    position: relative;
-    margin-bottom: 50px;
-}
-    
-.gigs >li .details {                /*sets attributes to the GIGS list container on the DETAILS div*/
-    position: absolute;
-    top: 0;
-    left: 70px;
-    right: 900px;  /*ii inaset border-image-outset GOING ?*/
-}
+        .details {
+            position: absolute;
+            top: 0;
+            left: 70px;
+            right: 900px;
 
-.gigs >li .date {
-    background: #c31818;
-    color: #ffffff;
-    text-align: center;
-    width: 60px;
-    height: 85px;
-    -ms-border-radius: 6px;
-    border-radius: 6px;
-}
+            .artist {
+                font-weight: bold;
+                display: block;
+            }
 
-.gigs > li .date .month {
-    text-transform: uppercase;
-    font-size: 14px;
-    font-weight: bold;
-    padding: 2px 6px;
-}
+            .genre {
+                font-size: 14px;
+            }
+        }
 
-.gigs > li .date .day {
-    background: #ccccaa;
-    color: #333;
-    font-size: 20px;
-    padding: 2px 6px;
-}
+        .date {
+            background: #c31818;
+            color: @color_5;
+            text-align: center;
+            width: 60px;
+            height: 85px;
+            -ms-border-radius: 6px;
+            border-radius: 6px;
 
+            .month {
+                text-transform: uppercase;
+                font-size: 14px;
+                font-weight: bold;
+                padding: 2px 6px;
+            }
 
-    .gigs >li .details .artist {
-        font-weight: bold;
-        display: block;
+            .day {
+                background: #ccccaa;
+                color: @color_6;
+                font-size: 20px;
+                padding: 2px 6px;
+            }
+        }
+
+        .actions {
+            font-size: 15px;
+            display: none;
+        }
+
+        &:hover {
+            .actions {
+                display: block;
+            }
+        }
     }
+}
 
-
-    .gigs > li .details .genre {
-        font-size: 14px;
+.popover-notifications {
+    .popover-content {
+        padding: 0;
     }
-
-
-.gigs >li .actions {    /*in MINE.CSHTM - the DIV ACTION wont display but only on hover*/
-    font-size: 15px;
-    display: none;
-}
-
-
-.gigs > li:hover .actions {     /*in MINE.CSHTM - the DIV ACTION wont display but only on hover*/
-    display: block;
-}
-
-
-/*todo               -------------------CASTRO MANENOS----------------------------        */
-/*todo    STYLING YA NOTIFICATIONS */
-
-.popover-notifications .popover-content {           /*ii aifanyi, kwa LAYOUT nimedefine bt haiduu*/
-    padding: 0;
 }
 
 ul.notifications {
@@ -247,8 +347,10 @@ ul.notifications {
         padding: 10px 0;
     }
 
-    > li:last-child {
-        border-bottom: none;
+    > li {
+        &:last-child {
+            border-bottom: none;
+        }
     }
 
     .highlight {
@@ -260,3 +362,4 @@ ul.notifications {
         text-decoration: underline;
     }
 }
+

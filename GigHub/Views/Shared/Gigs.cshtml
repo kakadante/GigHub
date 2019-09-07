@@ -8,50 +8,64 @@
 
 <h1>@Model.Heading</h1>
 
-<ul class="gigs voffset5">
-    @foreach (var gig in Model.UpcomingGigs)
-    {
-        @*<li>                                            //This is what was there before
-            @gig.DateTime - @gig.Artist.Name
-        </li>*@
+@*----- IMPLEMENTING THE SEARCH BUTTON ------------*@
 
+@using (Html.BeginForm("Search", "Gigs"))
+{
+    <div class="form-group">
+        @ Html.TextBoxFor(m => m.SearchTerm, new { @class="form-control"})
+    </div>
+
+    <input type="submit" value="Search"/>
+
+}
+
+@*----- ------------------------------ ------------*@
+
+
+< ul class="gigs voffset5">
+    @foreach (var gig in Model.UpcomingGigs)
+{
+        @*<li>                                            //This is what was there before
+                @gig.DateTime - @gig.Artist.Name
+    
         //WITH (WEB-ESSENTIALS) PLUGIN ACTIVATED ---- ZENCODING
 
         //Create classes simply like this
 
         //(div.date>div.month+div.day)+(div.details>span.artist+span.genre)
-    <li>
-        <div class="date">
-            <div class="month">
-                @gig.DateTime.ToString("MMM")
+        <li>
+            <div class="date">
+                <div class="month">
+                    @gig.DateTime.ToString("MMM")
+                </div>
+                <div class="day">
+                    @gig.DateTime.ToString("d ")
+                </div>
             </div>
-            <div class="day">
-                @gig.DateTime.ToString("d ")
-            </div>
-        </div>
-        <div class="details">
-            <span class="artist">
-                @gig.Artist.Name 
-                
-                @if (gig.IsCanceled)
-                {
-                    <span class ="label label-warning">This Gig Is Canceled</span>
-                }
+            <div class="details">
+                <span class="artist">
+                    @gig.Artist.Name
 
+                    @if (gig.IsCanceled)
+                    {
+                        <span class="label label-warning">This Gig Is Canceled</span>
+                    }
+
+                    @if (Model.ShowActions && !gig.IsCanceled)
+                    {
+                        <button class="btn btn-link btn-sm pull-right js-toggle-follow" data-user-id="@gig.ArtistId">Wanna Follow?</button>
+                    }
+                </span>
+                <span class="genre">
+                    @gig.Genre.Name
+                </span>
                 @if (Model.ShowActions && !gig.IsCanceled)
-                   {
-                       <button class="btn btn-link btn-sm pull-right js-toggle-follow" data-user-id="@gig.ArtistId">Wanna Follow?</button>
-                   }
-            </span>
-            <span class="genre">
-                @gig.Genre.Name
-            </span>
-                  @if (Model.ShowActions && !gig.IsCanceled)
-                  {
-                      <button data-gig-id="@gig.Id" class="btn btn-default btn-sm pull-right js-toggle-attendance">Going ?</button>
-                  }
-        </div>                                                                      @*js-toggle-attendance*@
-    </li>
+                {
+                    <button data-gig-id="@gig.Id" class="btn btn-default btn-sm pull-right js-toggle-attendance">Going ?</button>
+                }
+            </div>                                                                      @*js-toggle-attendance*@
+        </li>
     }
 </ul>
 
@@ -62,15 +76,15 @@
             $(".js-toggle-attendance").click(function(e) {             @*js-toggle-attendance*@
 
                 var button = $(e.target);
-                //todo 1.    $.post("/api/attendances", button.attr("data-gig-id")) 
+                //todo 1.    $.post("/api/attendances", button.attr("data-gig-id"))
                 //?  cant work since the API action result is decorated with [FROM BODY]
 
-                //todo .    $.post("/api/attendances", { "":button.attr("data-gig-id")}) 
+                //todo .    $.post("/api/attendances", { "":button.attr("data-gig-id")})
                 //?  This is the best alternative but the "" (the space) looks unprofessional
 
                 $.post("/api/attendances", { gigId: button.attr("data-gig-id") }) //Making an AJAX call to our API
                     //?  This is the best - gigId instead of the space. (cleaner way)
-                    //todo  TO WRAP THE [FROM BODY]GIGID PARAMETER - IN attendancecontroller api, LETS create another class above 
+                    //todo  TO WRAP THE [FROM BODY]GIGID PARAMETER - IN attendancecontroller api, LETS create another class above
 
                     //SO WE HAVE e.target IN THE LINE ABOVE AND BELOW. Lets make a VARIABLE to store it
                     .done(function() { //SUCCESS
@@ -79,7 +93,7 @@
                             .addClass("btn-warning")
                             .text("WILL GO");
                     })
-                    .fail(function() { //FAIL  
+                    .fail(function() { //FAIL
                         alert("GIG BOOKING FAILED");
                     });
             });

@@ -1,0 +1,262 @@
+﻿body {
+    padding-top: 100px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/  
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+
+.voffset {                                      /*ALL ARE VERTICAL MARGIN OFFSETS*/
+    margin-top: 2px;
+}
+.voffset1 {
+    margin-top: 5px;
+}
+.voffset2 {
+    margin-top: 20px;
+}
+.voffset3 {
+    margin-top: 40px;
+}
+.voffset4 {
+    margin-top: 60px;
+}
+.voffset5 {
+     margin-top: 80px;
+}
+
+
+
+
+
+
+            /* BOOTSTRAP OVERRIDES */
+body {                                                  /*affects the whole body but not the NAVBAR*/
+    font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+
+
+
+
+.navbar {                                               /*affects the NAVBAR*/
+    background-color: #ff4342;
+    border-color: #ff4342;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #fff;
+    font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    /*font-weight: 800;*/
+}
+
+.navbar-brand {
+    font-size: 20px;
+    padding: 15px 16px;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #d8cece;
+    font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.navbar-inverse .notifications .badge{
+    position: absolute;
+    top: 8px;
+    right: -2px;
+    background: #a80a0a;
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    background-color: #ce2d2dd6;
+}
+
+.navbar-inverse .navbar-nav > .dropdown > a .caret {            /*Izi mbili ni za io Caret*/
+    border-top-color: #fff;
+    border-bottom-color: #fff;
+}
+
+.navbar-inverse .navbar-nav > .open > a .caret, .navbar-inverse .navbar-nav > .open > a:hover .caret, .navbar-inverse .navbar-nav > .open > a:focus .caret {
+    border-top-color: #020202;
+    border-bottom-color: #c31818;
+}
+
+.popover {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+
+
+
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { /*affects the HEADINGS*/
+    font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    line-height: 1.0;
+}
+
+.form-group {                                       /*affects the FORM*/
+    margin-bottom: 20px;
+}
+
+.form-control {                         /*Izi zina-affect adi Text-Boxes za form*/
+    display: block;
+    width: 100%;
+    height: 43px;
+    padding: 6px 20px;
+    font-size: 14px;
+    line-height: 1.128571429;
+    color: #555555;
+    vertical-align: middle;
+    background-color: #CCCCAA;
+    border: 2px solid #CCCC78;
+    border-radius: 14px;
+}
+
+
+.btn { /*ii ni io button ya Save uko down*/
+    display: inline-block;
+    /*padding: 6px 22px;*/
+    margin-bottom: 0px;
+    margin-top: 2px;
+    /*font-size: 14px;*/
+    font-weight: normal;
+    line-height: 1.428571429;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 2px solid #00000021;
+    -ms-border-radius: 18px;
+    border-radius: 16px;
+}
+
+.form-control:focus {                       /*ii ni saa zenye unahover TEXT BOX uselect data*/
+    border-color: #dfff00;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+
+
+/*CLASS THAT IS NOT PART OF BOOTSTRAP BUT PART OF ASP.NET MVC*/
+span.field-validation-error {
+    color: #ff0000;
+}
+
+
+
+/*PAGE-LEVEL STYLES*/
+.gigs {                         /*removes bullets*/
+    list-style: none;
+}
+
+
+.gigs > li {                    /*sets attributes to the GIGS list container*/  
+    position: relative;
+    margin-bottom: 50px;
+}
+    
+.gigs >li .details {                /*sets attributes to the GIGS list container on the DETAILS div*/
+    position: absolute;
+    top: 0;
+    left: 70px;
+    right: 900px;  /*ii inaset border-image-outset GOING ?*/
+}
+
+.gigs >li .date {
+    background: #c31818;
+    color: #ffffff;
+    text-align: center;
+    width: 60px;
+    height: 85px;
+    -ms-border-radius: 6px;
+    border-radius: 6px;
+}
+
+.gigs > li .date .month {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 2px 6px;
+}
+
+.gigs > li .date .day {
+    background: #ccccaa;
+    color: #333;
+    font-size: 20px;
+    padding: 2px 6px;
+}
+
+
+    .gigs >li .details .artist {
+        font-weight: bold;
+        display: block;
+    }
+
+
+    .gigs > li .details .genre {
+        font-size: 14px;
+    }
+
+
+.gigs >li .actions {    /*in MINE.CSHTM - the DIV ACTION wont display but only on hover*/
+    font-size: 15px;
+    display: none;
+}
+
+
+.gigs > li:hover .actions {     /*in MINE.CSHTM - the DIV ACTION wont display but only on hover*/
+    display: block;
+}
+
+
+/*todo               -------------------CASTRO MANENOS----------------------------        */
+/*todo    STYLING YA NOTIFICATIONS */
+
+.popover-notifications .popover-content {           /*ii aifanyi, kwa LAYOUT nimedefine bt haiduu*/
+    padding: 0;
+}
+
+ul.notifications {
+    list-style: none;
+    padding-left: 0;
+
+    > li {
+        border-bottom: 1px solid #ddd;
+        padding: 10px 0;
+    }
+
+    > li:last-child {
+        border-bottom: none;
+    }
+
+    .highlight {
+        font-weight: bold;
+    }
+
+    .highlight2 {
+        font-weight: bold;
+        text-decoration: underline;
+    }
+}
