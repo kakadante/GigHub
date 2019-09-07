@@ -13,27 +13,30 @@
 @using (Html.BeginForm("Search", "Gigs"))
 {
     <div class="form-group">
-        @ Html.TextBoxFor(m => m.SearchTerm, new { @class="form-control"})
+        <div id="searchGigs" class="input-group">
+            @Html.TextBoxFor(m => m.SearchTerm, new { @class = "form-control" })
+            <span class="input-group-addon" >
+                <i class="glyphicon glyphicon-search"></i>
+            </span>
+        </div>
     </div>
-
-    <input type="submit" value="Search"/>
-
 }
 
 @*----- ------------------------------ ------------*@
 
 
-< ul class="gigs voffset5">
+<ul class="gigs voffset5">
     @foreach (var gig in Model.UpcomingGigs)
 {
-        @*<li>                                            //This is what was there before
+            
+            @*//This is what was there before
                 @gig.DateTime - @gig.Artist.Name
     
         //WITH (WEB-ESSENTIALS) PLUGIN ACTIVATED ---- ZENCODING
 
         //Create classes simply like this
 
-        //(div.date>div.month+div.day)+(div.details>span.artist+span.genre)
+        //(div.date>div.month+div.day)+(div.details>span.artist+span.genre)*@
         <li>
             <div class="date">
                 <div class="month">
@@ -73,7 +76,7 @@
 {
     <script>
         $(document).ready(function() {
-            $(".js-toggle-attendance").click(function(e) {             @*js-toggle-attendance*@
+            $(".js-toggle-attendance").click(function(e) {             /*js-toggle-attendance*/
 
                 var button = $(e.target);
                 //todo 1.    $.post("/api/attendances", button.attr("data-gig-id"))

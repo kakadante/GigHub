@@ -20,11 +20,11 @@ namespace GigHub.Controllers
                 _context = new ApplicationDbContext();
         }                                                       //HERE ->   All this is retrieving data from database
 
-//This constructor can also be written this way
+//!This constructor can also be written this way
 
-// private ApplicationDbContext _context = new ApplicationDbContext();
+//todo private ApplicationDbContext _context = new ApplicationDbContext();
 
-        public ActionResult Index()
+        public ActionResult Index(string query = null)
         {
             var upcomingGigs = _context.Gigs                            //All this 3 
                                 .Include(g => g.Artist)     
@@ -32,11 +32,21 @@ namespace GigHub.Controllers
                                 .Where(g => g.DateTime > DateTime.Now && !g.IsCanceled);  //its always not a GOOD PRACTICE
                                                                         //TO SCROLL to the RIGHT.
 
-             var viewModel = new GigsViewModel
-             {
-                 UpcomingGigs = upcomingGigs,
-                 ShowActions = User.Identity.IsAuthenticated,
-                 Heading = "ALL THE UPCOMING GIGS"
+            if (!String.IsNullOrWhiteSpace(query))
+            {
+                upcomingGigs = upcomingGigs
+                    .Where(g =>
+                               g.Artist.Name.Contains(query) ||
+                               g.Genre.Name.Contains(query) ||
+                               g.Venue.Contains(query));
+            }
+
+            var viewModel = new GigsViewModel
+            {
+                UpcomingGigs = upcomingGigs,
+                ShowActions = User.Identity.IsAuthenticated,
+                Heading = "ALL THE UPCOMING GIGS",
+                 SearchTerm = query
              };
 
             return View("Gigs", viewModel);                                  //THEN FINALIZE BY PUTTING THE MODEL INSIDE THE VIEW (upcomingGigs)     

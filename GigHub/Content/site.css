@@ -266,3 +266,6 @@ ul.notifications .highlight2 {
   font-weight: bold;
   text-decoration: underline;
 }
+#searchGigs {
+  width: 300px;
+}
