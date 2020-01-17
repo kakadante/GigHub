@@ -58,11 +58,17 @@ namespace GigHub.Controllers
                 .Include(g => g.Genre)              /*Here we should ega load GENRE*/
                 .ToList();
 
+            var attendances = _context.Attendances
+                .Where(a => a.AttendeeId == userId && a.Gig.DateTime > DateTime.Now)
+                .ToList()
+                .ToLookup(a => a.GigId);
+
             var viewModel = new GigsViewModel()
             {
                 UpcomingGigs = gigs,
                 ShowActions = User.Identity.IsAuthenticated,
-                Heading = "Gig's I'm attending"
+                Heading = "Gig's I'm attending",
+                Attendances = attendances
             };
 
             return View("Gigs", viewModel);
