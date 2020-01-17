@@ -68,7 +68,7 @@
                         {
                     //aka kasection kanarender BUTTONS vile zinafaa kua
 
-                    <button data-gig-id="@gig.Id" class="btn @(Model.Attendances.Contains(gig.Id) ? "btn-info" : "btn-default") btn-sm pull-right js-toggle-attendance">
+                    <button data-gig-id="@gig.Id" class="btn @(Model.Attendances.Contains(gig.Id) ? "btn-warning" : "btn-default") btn-sm pull-right js-toggle-attendance">
                         Going ?
                     </button>
                 }
@@ -89,21 +89,42 @@
 
                 //todo .    $.post("/api/attendances", { "":button.attr("data-gig-id")})
                 //?  This is the best alternative but the "" (the space) looks unprofessional
+                if (button.hasClass("btn-default")) {
 
-                $.post("/api/attendances", { gigId: button.attr("data-gig-id") }) //Making an AJAX call to our API
-                    //?  This is the best - gigId instead of the space. (cleaner way)
-                    //todo  TO WRAP THE [FROM BODY]GIGID PARAMETER - IN attendancecontroller api, LETS create another class above
+                    $.post("/api/attendances", { gigId: button.attr("data-gig-id") }) //Making an AJAX call to our API
+                        //?  This is the best - gigId instead of the space. (cleaner way)
+                        //todo  TO WRAP THE [FROM BODY]GIGID PARAMETER - IN attendancecontroller api, LETS create another class above
 
-                    //SO WE HAVE e.target IN THE LINE ABOVE AND BELOW. Lets make a VARIABLE to store it
-                    .done(function() { //SUCCESS
-                        button
-                            .removeClass("btn-default")
-                            .addClass("btn-warning")
-                            .text("WILL GO");
+                        //SO WE HAVE e.target IN THE LINE ABOVE AND BELOW. Lets make a VARIABLE to store it
+                        .done(function () { //SUCCESS
+                            button
+                                .removeClass("btn-default")
+                                .addClass("btn-warning")
+                                .text("WILL GO");
+                        })
+                        .fail(function () { //FAIL
+                            alert("GIG BOOKING FAILED");
+                        });
+                } else {
+                    $.ajax({
+                        url: "/api/attendances/" + button.attr("data-gig-id"),
+                        method: "DELETE"
                     })
-                    .fail(function() { //FAIL
-                        alert("GIG BOOKING FAILED");
-                    });
+
+
+                        .done(function () {
+                            button
+                                .removeClass("btn-warning")
+                                .addClass("btn-default")
+                                .text("Going ?");
+                        })
+
+
+
+                        .fail(function () {
+
+                        });
+
             });
 
 
