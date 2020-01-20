@@ -18,25 +18,33 @@
 
         //todo .    $.post("/api/attendances", { "":button.attr("data-gig-id")})
         //?  This is the best alternative but the "" (the space) looks unprofessional
-        if (button.hasClass("btn-default")) {
-
-            $.post("/api/attendances", { gigId: button.attr("data-gig-id") }) //Making an AJAX call to our API
-                //?  This is the best - gigId instead of the space. (cleaner way)
-                //todo  TO WRAP THE [FROM BODY]GIGID PARAMETER - IN attendancecontroller api, LETS create another class above
-
-                //SO WE HAVE e.target IN THE LINE ABOVE AND BELOW. Lets make a VARIABLE to store it
-                .done(done)
-                .fail(fail);
-        } else {
-            $.ajax({
-                url: "/api/attendances/" + button.attr("data-gig-id"),
-                method: "DELETE"
-            })
+        if (button.hasClass("btn-default"))
+            createAttendance();
+        else
+            deleteAttendance();
+    };
 
 
-                .done(done)
-                .fail(fail);
-        }
+    var createAttendance = function () {
+        $.post("/api/attendances", { gigId: button.attr("data-gig-id") }) //Making an AJAX call to our API
+            //?  This is the best - gigId instead of the space. (cleaner way)
+            //todo  TO WRAP THE [FROM BODY]GIGID PARAMETER - IN attendancecontroller api, LETS create another class above
+
+            //SO WE HAVE e.target IN THE LINE ABOVE AND BELOW. Lets make a VARIABLE to store it
+            .done(done)
+            .fail(fail);
+    };
+
+
+    var deleteAttendance = function () {
+        $.ajax({
+            url: "/api/attendances/" + button.attr("data-gig-id"),
+            method: "DELETE"
+        })
+
+
+            .done(done)
+            .fail(fail);
     };
 
 
