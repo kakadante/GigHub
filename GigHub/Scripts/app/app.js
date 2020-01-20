@@ -1,5 +1,7 @@
 ﻿var GigsController = function () {
 
+    var button;
+
     var init = function () {
         $(".js-toggle-attendance").click(toggleAttendance) {             /*js-toggle-attendance*/
 
@@ -7,8 +9,10 @@
         });
     };
 
+
+
     var toggleAttendance = function (e) {
-        var button = $(e.target);
+        button = $(e.target);
         //todo 1.    $.post("/api/attendances", button.attr("data-gig-id"))
         //?  cant work since the API action result is decorated with [FROM BODY]
 
@@ -21,15 +25,8 @@
                 //todo  TO WRAP THE [FROM BODY]GIGID PARAMETER - IN attendancecontroller api, LETS create another class above
 
                 //SO WE HAVE e.target IN THE LINE ABOVE AND BELOW. Lets make a VARIABLE to store it
-                .done(function () { //SUCCESS
-                    button
-                        .removeClass("btn-default")
-                        .addClass("btn-warning")
-                        .text("WILL GO");
-                })
-                .fail(function () { //FAIL
-                    alert("GIG BOOKING FAILED");
-                });
+                .done(done)
+                .fail(fail);
         } else {
             $.ajax({
                 url: "/api/attendances/" + button.attr("data-gig-id"),
@@ -37,19 +34,20 @@
             })
 
 
-                .done(function () {
-                    button
-                        .removeClass("btn-warning")
-                        .addClass("btn-default")
-                        .text("Going ?");
-                })
-
-
-
-                .fail(function () {
-                    alert("Something Failed");
-                });
+                .done(done)
+                .fail(fail);
         }
+    };
+
+
+    var done = function () {
+        var text = (button.text() == "WILL GO") ? "Going ?" : "WILL GO";
+
+        button.toggleClass("btn-warning").toggleClass("btn-default").text(text);
+    };
+
+    var fail = function () {
+        alert("Something Failed");
     };
 
     return {
