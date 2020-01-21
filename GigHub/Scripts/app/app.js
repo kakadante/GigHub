@@ -1,7 +1,7 @@
 ﻿var attendanceService = function () {
 
-    var createAttendance = function () {
-        $.post("/api/attendances", { gigId: button.attr("data-gig-id") }) //Making an AJAX call to our API
+    var createAttendance = function (gigId, done, fail) {
+        $.post("/api/attendances", { gigId: gigId }) //Making an AJAX call to our API
             //?  This is the best - gigId instead of the space. (cleaner way)
             //todo  TO WRAP THE [FROM BODY]GIGID PARAMETER - IN attendancecontroller api, LETS create another class above
 
@@ -11,9 +11,9 @@
     };
 
 
-    var deleteAttendance = function () {
+    var deleteAttendance = function (gigId, done, fail) {
         $.ajax({
-            url: "/api/attendances/" + button.attr("data-gig-id"),
+            url: "/api/attendances/" + gigId,
             method: "DELETE"
         })
 
@@ -35,7 +35,7 @@
 
 
 
-var GigsController = function () {
+var GigsController = function (attendanceService) {
 
     var button;
 
@@ -47,15 +47,20 @@ var GigsController = function () {
 
     var toggleAttendance = function (e) {
         button = $(e.target);
+
+        var gigId = button.attr("data-gig-id");
+
         //todo 1.    $.post("/api/attendances", button.attr("data-gig-id"))
         //?  cant work since the API action result is decorated with [FROM BODY]
 
         //todo .    $.post("/api/attendances", { "":button.attr("data-gig-id")})
         //?  This is the best alternative but the "" (the space) looks unprofessional
+
+
         if (button.hasClass("btn-default"))
-            createAttendance();
+            attendanceService.createAttendance(gigId, done, fail);
         else
-            deleteAttendance();
+            attendanceService.deleteAttendance(gigId, done, fail);
     };
 
 
@@ -73,4 +78,4 @@ var GigsController = function () {
         init: init
     }
 
-}();
+}(AttendanceService);
