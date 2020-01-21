@@ -1,29 +1,4 @@
-﻿var GigsController = function () {
-
-    var button;
-
-    var init = function () {
-        $(".js-toggle-attendance").click(toggleAttendance) {             /*js-toggle-attendance*/
-
-            
-        });
-    };
-
-
-
-    var toggleAttendance = function (e) {
-        button = $(e.target);
-        //todo 1.    $.post("/api/attendances", button.attr("data-gig-id"))
-        //?  cant work since the API action result is decorated with [FROM BODY]
-
-        //todo .    $.post("/api/attendances", { "":button.attr("data-gig-id")})
-        //?  This is the best alternative but the "" (the space) looks unprofessional
-        if (button.hasClass("btn-default"))
-            createAttendance();
-        else
-            deleteAttendance();
-    };
-
+﻿var attendanceService = function () {
 
     var createAttendance = function () {
         $.post("/api/attendances", { gigId: button.attr("data-gig-id") }) //Making an AJAX call to our API
@@ -45,6 +20,42 @@
 
             .done(done)
             .fail(fail);
+    };
+
+    return {
+        createAttendance: createAttendance,
+        deleteAttendance: deleteAttendance
+    }
+}();
+
+
+
+
+
+
+
+
+var GigsController = function () {
+
+    var button;
+
+    var init = function () {
+        $(".js-toggle-attendance").click(toggleAttendance);             /*js-toggle-attendance*/
+    };
+
+
+
+    var toggleAttendance = function (e) {
+        button = $(e.target);
+        //todo 1.    $.post("/api/attendances", button.attr("data-gig-id"))
+        //?  cant work since the API action result is decorated with [FROM BODY]
+
+        //todo .    $.post("/api/attendances", { "":button.attr("data-gig-id")})
+        //?  This is the best alternative but the "" (the space) looks unprofessional
+        if (button.hasClass("btn-default"))
+            createAttendance();
+        else
+            deleteAttendance();
     };
 
 
