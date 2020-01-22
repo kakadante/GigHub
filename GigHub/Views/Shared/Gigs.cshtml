@@ -56,10 +56,10 @@
                         <span class="label label-warning">This Gig Is Canceled</span>
                     }
 
-                    @if (Model.ShowActions && !gig.IsCanceled)
+                    @*@if (Model.ShowActions && !gig.IsCanceled)
                     {
                         <button class="btn btn-link btn-sm pull-right js-toggle-follow" data-user-id="@gig.ArtistId">Wanna Follow?</button>
-                    }
+                    }*@
                 </span>
                 <span class="genre">
                     @gig.Genre.Name
@@ -82,22 +82,6 @@
     <script>
         $(document).ready(function () {
             GigsController.init("#gigs");
-
-
-            //JQUERY for FOLLOWING
-
-            $(".js-toggle-follow").click(function(e) {
-                var button = $(e.target);
-
-                $.post("/api/followings", { followeeId: button.attr("data-user-id") }) //Making an AJAX call to our API
-                    .done(function() {
-                        button.text("Following");
-                    })
-
-                    .fail(function () {
-                        alert("Something Failed");
-                    });
-            });
 
         });
     </script>
