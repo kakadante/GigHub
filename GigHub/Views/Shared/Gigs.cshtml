@@ -24,7 +24,7 @@
 
 @*----- ------------------------------ ------------*@
 
-<ul class="gigs voffset5">
+<ul id="gigs" class="gigs voffset5">
     @foreach (var gig in Model.UpcomingGigs)
 {
             
@@ -81,7 +81,7 @@
 {
     <script>
         $(document).ready(function () {
-            GigsController.init();
+            GigsController.init("#gigs");
 
 
             //JQUERY for FOLLOWING
