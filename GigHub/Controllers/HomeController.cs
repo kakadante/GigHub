@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using GigHub.Models;
+using GigHub.Repositories;
 using GigHub.ViewModels;
 using Microsoft.AspNet.Identity;
 
@@ -15,11 +16,13 @@ namespace GigHub.Controllers
     {
 
         private ApplicationDbContext _context;                  //From Here to...
+        private readonly AttendanceRepository _attendanceRepository;
 
         public HomeController()                    /*--This is Just a constructor (CTOR +TAB*2)--*/
         {
-                _context = new ApplicationDbContext();
-        }                                                       //HERE ->   All this is retrieving data from database
+                _context = new ApplicationDbContext();          //HERE ->   All this is retrieving data from database
+                _attendanceRepository = new AttendanceRepository(_context);
+        }                                                       
 
 //!This constructor can also be written this way
 
@@ -45,10 +48,7 @@ namespace GigHub.Controllers
 
             //to load all ATTENDANCES teh USER is GOING
             string userId = User.Identity.GetUserId();
-            var attendances = _context.Attendances
-                .Where(a => a.AttendeeId == userId && a.Gig.DateTime > DateTime.Now)
-                .ToList()
-                .ToLookup(a => a.GigId);
+            var attendances = _attendanceRepository.GetFutureAttendances(userId).ToLookup(a => a.GigId);
 
 
 

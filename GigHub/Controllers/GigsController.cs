@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using System.Linq;
 using System.Web.Mvc;
 using System.Collections.Generic;
+using GigHub.Repositories;
 
 namespace GigHub.Controllers
 {
@@ -13,10 +14,14 @@ namespace GigHub.Controllers
     {
 
         private readonly ApplicationDbContext _context;
+        private readonly AttendanceRepository _attendanceRepository;
+        private readonly GigRepository _gigRepository;
 
         public GigsController()
         {
             _context = new ApplicationDbContext();
+            _attendanceRepository = new AttendanceRepository(_context);
+            _gigRepository = new GigRepository(_context);
         }
 
 
@@ -56,32 +61,17 @@ namespace GigHub.Controllers
 
             var viewModel = new GigsViewModel()
             {
-                UpcomingGigs = GetGigsUserAttending(userId),
+                UpcomingGigs = _gigRepository.GetGigsUserAttending(userId),
                 ShowActions = User.Identity.IsAuthenticated,
                 Heading = "Gig's I'm attending",
-                Attendances = GetFutureAttendances(userId).ToLookup(a => a.GigId)
+                Attendances = _attendanceRepository.GetFutureAttendances(userId).ToLookup(a => a.GigId)
             };
 
             return View("Gigs", viewModel);
         }
 
-        private List<Attendance> GetFutureAttendances(string userId)
-        {
-            return _context.Attendances
-                            .Where(a => a.AttendeeId == userId && a.Gig.DateTime > DateTime.Now)
-                            .ToList();
-        }
 
-        private List<Gig> GetGigsUserAttending(string userId)
-        {
-            var gigs = _context.Attendances
-                .Where(a => a.AttendeeId == userId)
-                .Select(a => a.Gig)
-                .Include(g => g.Artist)             /*Here we should ega load ARTIST*/
-                .Include(g => g.Genre)              /*Here we should ega load GENRE*/
-                .ToList();
-            return gigs;
-        }
+        
 
         [HttpPost]
         public ActionResult Search(GigsViewModel viewModel)
