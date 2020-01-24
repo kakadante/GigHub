@@ -7,12 +7,12 @@ using System.Web;
 
 namespace GigHub.Persistence
 {
-    public class UnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _context;
 
-        public GigRepository Gigs { get; private set; }
-        public AttendanceRepository Attendances { get; private set; }
+        public IGigRepository Gigs { get; private set; }
+        public IAttendanceRepository Attendances { get; private set; }
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -21,7 +21,7 @@ namespace GigHub.Persistence
             Attendances = new AttendanceRepository(context);
         }
 
-        public void Complete() 
+        public void Complete()
         {
             _context.SaveChanges();   // You can call this METHOD Save() or SaveChanges()
         }
