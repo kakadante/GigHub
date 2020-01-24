@@ -15,16 +15,12 @@ namespace GigHub.Controllers
     {
 
         private readonly ApplicationDbContext _context;
-        private readonly AttendanceRepository _attendanceRepository;
-        private readonly GigRepository _gigRepository;
-        private readonly UnitOfWork _unitofwork;
+        private readonly UnitOfWork _unitOfWork;
 
         public GigsController()
         {
             _context = new ApplicationDbContext();
-            _attendanceRepository = new AttendanceRepository(_context);
-            _gigRepository = new GigRepository(_context);
-            _unitofwork = new UnitOfWork(_context);
+            _unitOfWork = new UnitOfWork(_context);
         }
 
 
@@ -64,10 +60,10 @@ namespace GigHub.Controllers
 
             var viewModel = new GigsViewModel()
             {
-                UpcomingGigs = _gigRepository.GetGigsUserAttending(userId),
+                UpcomingGigs = _unitOfWork.Gigs.GetGigsUserAttending(userId),
                 ShowActions = User.Identity.IsAuthenticated,
                 Heading = "Gig's I'm attending",
-                Attendances = _attendanceRepository.GetFutureAttendances(userId).ToLookup(a => a.GigId)
+                Attendances = _unitOfWork.Attendances.GetFutureAttendances(userId).ToLookup(a => a.GigId)
             };
 
             return View("Gigs", viewModel);
@@ -169,8 +165,8 @@ namespace GigHub.Controllers
                 Venue = viewModel.Venue
             };
 
-            _gigRepository.Add(gig);
-            _unitofwork.Complete();
+            _unitOfWork.Gigs.Add(gig);
+            _unitOfWork.Complete();
 
             return RedirectToAction("Mine", "Gigs"); //Before the user was directed to ("index", "Home") index in HomeController
                                                      //but we need to redirect them to mine after they Create a Gig
@@ -192,7 +188,7 @@ namespace GigHub.Controllers
                 return View("GigForm", viewModel);
             }
 
-            var gig = _gigRepository.GetGigWithAttendees(viewModel.Id);
+            var gig = _unitOfWork.Gigs.GetGigWithAttendees(viewModel.Id);
             //gig.Venue = viewModel.Venue;
             //gig.DateTime = viewModel.GetDateTime();
             //gig.GenreId = viewModel.Genre;
@@ -205,7 +201,7 @@ namespace GigHub.Controllers
 
             gig.Modify(viewModel.GetDateTime(), viewModel.Venue, viewModel.Genre);
 
-            _unitofwork.Complete();
+            _unitOfWork.Complete();
 
             return RedirectToAction("Mine", "Gigs"); //Before the user was directed to ("index", "Home") index in HomeController
                                                      //but we need to redirect them to mine after they Create a Gig
