@@ -33,5 +33,10 @@ namespace GigHub.Repositories
                 .ToList();
             return gigs;
         }
+
+        public void Add(Gig gig)
+        {
+            _context.Gigs.Add(gig);
+        }
     }
 }

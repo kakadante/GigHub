@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Collections.Generic;
 using GigHub.Repositories;
+using GigHub.Persistence;
 
 namespace GigHub.Controllers
 {
@@ -16,12 +17,14 @@ namespace GigHub.Controllers
         private readonly ApplicationDbContext _context;
         private readonly AttendanceRepository _attendanceRepository;
         private readonly GigRepository _gigRepository;
+        private readonly UnitOfWork _unitofwork;
 
         public GigsController()
         {
             _context = new ApplicationDbContext();
             _attendanceRepository = new AttendanceRepository(_context);
             _gigRepository = new GigRepository(_context);
+            _unitofwork = new UnitOfWork(_context);
         }
 
 
@@ -166,8 +169,8 @@ namespace GigHub.Controllers
                 Venue = viewModel.Venue
             };
 
-            _context.Gigs.Add(gig);
-            _context.SaveChanges();
+            _gigRepository.Add(gig);
+            _unitofwork.Complete();
 
             return RedirectToAction("Mine", "Gigs"); //Before the user was directed to ("index", "Home") index in HomeController
                                                      //but we need to redirect them to mine after they Create a Gig
@@ -202,7 +205,7 @@ namespace GigHub.Controllers
 
             gig.Modify(viewModel.GetDateTime(), viewModel.Venue, viewModel.Genre);
 
-            _context.SaveChanges();
+            _unitofwork.Complete();
 
             return RedirectToAction("Mine", "Gigs"); //Before the user was directed to ("index", "Home") index in HomeController
                                                      //but we need to redirect them to mine after they Create a Gig
