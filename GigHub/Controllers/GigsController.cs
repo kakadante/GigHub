@@ -19,7 +19,8 @@ namespace GigHub.Controllers
 
         public GigsController()
         {
-            _unitOfWork = new UnitOfWork(new ApplicationDbContext());
+            _context = new ApplicationDbContext();
+            _unitOfWork = new UnitOfWork(_context);
         }
 
 
