@@ -17,13 +17,17 @@ namespace GigHub.Persistence.EntityConfigurations
             Property(g => g.ArtistId)
                 .IsRequired();
 
+            Property(g => g.GenreId)
+                .IsRequired();
+
             Property(g => g.Venue)
                 .IsRequired()
                 .HasMaxLength(255);
 
-            Property(g => g.GenreId)
-                .IsRequired();
 
+                HasMany(g => g.Attendances)
+                .WithRequired(a => a.Gig)
+                .WillCascadeOnDelete(false);
 
             //todo -------------------------To this SECTION Here -----------------------------  
         }
