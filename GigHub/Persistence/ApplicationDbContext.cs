@@ -29,6 +29,12 @@ namespace GigHub.Persistence
         //TUME-ADD II (FLUENT API) KUoverride io domain model (ATTENDANCE) ndio ikue na rltnship ya MANY TO MANY
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+
+
+
+
+
+
             modelBuilder.Entity<Attendance>()
                 .HasRequired(a => a.Gig)            //todo for GIG
                 .WithMany(g => g.Attendances)
